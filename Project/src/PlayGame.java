@@ -5,60 +5,79 @@ import java.util.Scanner;
 
 public class PlayGame {
 
-    public static void guessWord(List<String> words) {
+    public static String guessWord(List<String> words) {
 
+        // get random word using size of list as upper bound
         Random rand = new Random();
         String word = words.get(rand.nextInt(words.size()));
 
-        System.out.print(word); // for testing
-
+        // initialize list of guessed words, number of errors, and boolean ofr game continuation
         List<Character> guesses = new ArrayList<>();
         int errors = 0;
         boolean playing = true;
 
+        // print initial ASCII art and length of word
         System.out.println("\n");
-        DisplayGallows.displayGallows(0);
-        DisplayWord.displayWord(word, guesses, errors);
+        Gallows.displayGallows(0);
+        SelectedWord.displayWord(word, guesses, errors);
         System.out.print("\n");
 
         do {
 
-            System.out.println("\nPlease enter a letter:");
+            System.out.println("\nPlease enter a single letter:");
             Scanner input = new Scanner(System.in);
             String letterGuessed = input.next();
 
-            if (guesses.contains(letterGuessed.charAt(0))) {
-                System.out.println("\nYou already guessed that letter. No penalty.");
+            // ensure guess is a letter
+            if (letterGuessed.matches("[A-Za-z]")) {
 
-            } else if (word.contains(letterGuessed)) {
-                System.out.println("Good guess!");
-                guesses.add(letterGuessed.charAt(0)); // only take first char
+                // if letter is already guessed, retry with no penalty
+                if (guesses.contains(letterGuessed.charAt(0))) {
+                    System.out.print("\nYou already guessed that letter. No penalty.");
+                }
 
-            } else if (!guesses.contains(letterGuessed.charAt(0))) {
-                errors ++;
-                DisplayGallows.displayGallows(errors);
-                System.out.println("Bad guess...");
-                guesses.add(letterGuessed.charAt(0)); // only take first char
+                // if letter is correct, tell user and add to guesses list
+                else if (word.contains(letterGuessed)) {
+                    System.out.print("Good guess!");
+                    guesses.add(letterGuessed.charAt(0)); // only take first char
+                }
 
-            } else {
+                // if letter is incorrect, tell user, display gallows with added body part, and add to guesses list
+                else {
+                    errors ++;
+                    System.out.println("\nBad guess...");
+                    Gallows.displayGallows(errors);
+                    guesses.add(letterGuessed.charAt(0)); // only take first char
+
+                }
+
+                // display word and if all letters are guessed correctly, let user know and end game
+                if (SelectedWord.displayWord(word, guesses, errors)) {
+                    System.out.println("\n\nYou win!");
+                    playing = false;
+                }
+
+                // if all body parts are added, let user know and end game
+                if (errors == 6) {
+                    System.out.println("\nYou lose!");
+                    playing = false;
+                }
+
+                // if game continues, display letters guessed
+                if (playing) {
+                    System.out.print("\nLetters guessed so far: ");
+                    for (Character letter : guesses) {
+                        System.out.print(letter + " ");
+                    }
+                    System.out.print("\n");
+                }
+            }
+            else {
                 System.out.println("Invalid entry. Please try again.");
-                continue;
-            }
-
-            if (DisplayWord.displayWord(word, guesses, errors)) {
-                System.out.println("\n\nYou win!");
-                playing = false;
-            }
-
-            if (errors == 7) {
-                System.out.println("\nYou lose!");
-                playing = false;
-            }
-
-            if (playing) {
-                DisplayLettersGuessed.displayLettersGuessed(guesses, errors);
             }
 
         } while (playing);
+
+        return word;
     }
 }
