@@ -30,6 +30,7 @@ Game Description:
 Hangman asks the player to guess the letter of a random word based on its length. If the player guesses a letter that is in the word, the letter is written where it would be in the word. Reveal all the letters to win. If the player guesses a letter that is not in the word, part of a hanged man is drawn. If the drawing is made complete, like the ASCII art below, the player loses.
 
  +---+
+ 
  |
  0
 /|\
