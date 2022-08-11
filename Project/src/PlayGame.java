@@ -38,6 +38,7 @@ public class PlayGame {
 
                 // if letter is correct, tell user and add to guesses list
                 else if (word.contains(letterGuessed)) {
+                    PlayCorrectSoundEffect.playSoundEffect();
                     System.out.print("Good guess!");
                     guesses.add(letterGuessed.charAt(0)); // only take first char
                 }
@@ -45,6 +46,7 @@ public class PlayGame {
                 // if letter is incorrect, tell user, display gallows with added body part, and add to guesses list
                 else {
                     errors ++;
+                    PlayIncorrectSoundEffect.playSoundEffect();
                     System.out.println("\nBad guess...");
                     Gallows.displayGallows(errors);
                     guesses.add(letterGuessed.charAt(0)); // only take first char
@@ -53,12 +55,14 @@ public class PlayGame {
 
                 // display word and if all letters are guessed correctly, let user know and end game
                 if (SelectedWord.displayWord(word, guesses, errors)) {
+                    PlayVictorySoundEffect.playSoundEffect();
                     System.out.println("\n\nYou win!");
                     playing = false;
                 }
 
                 // if all body parts are added, let user know and end game
                 if (errors == 6) {
+                    PlayFailureSoundEffect.playSoundEffect();
                     System.out.println("\nYou lose!");
                     playing = false;
                 }

@@ -6,7 +6,13 @@ public class HangmanGame {
 
     public static void main(String[] args) {
 
+        // used to start and stop background music
+        boolean playingMusic = true;
+
         try {
+
+            // start music
+            PlayBackgroundMusic.handleAudio(playingMusic);
 
             // scan words.txt for list of words to guess
             Scanner scanner = new Scanner(new File("src/words.txt"));
@@ -22,9 +28,9 @@ public class HangmanGame {
                 // add word to each list based on length
                 String word = scanner.nextLine();
 
-                if (word.length() < 5){
+                if (word.length() > 8){
                     easyWords.add(word);
-                } else if (word.length() < 9) {
+                } else if (word.length() > 4) {
                     normalWords.add(word);
                 } else {
                     hardWords.add(word);
@@ -36,7 +42,7 @@ public class HangmanGame {
             System.out.println("**********************************************************");
 
             // initialize boolean to determine if user wants to keep playing
-            boolean playing = true;
+            boolean playingGame = true;
             // initialize string that will be the word used and therefore removed from list after a game
             String wordUsed = "";
 
@@ -82,15 +88,19 @@ public class HangmanGame {
                 Scanner playAgain = new Scanner(System.in);
                 String cont = playAgain.next();
                 if (!cont.equals("y") && !cont.equals("Y")) {
-                    playing = false;
+                    playingGame = false;
                 }
 
-            } while (playing);
+            } while (playingGame);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1); // terminate program
         }
         System.out.println("Thanks for playing.");
+
+        // stop music
+        playingMusic = false;
+        PlayBackgroundMusic.handleAudio(!playingMusic);
     }
 }
