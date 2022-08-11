@@ -27,14 +27,7 @@ Run HangmanGame.main() to start the game.
 
 Game Description:
 
-Hangman asks the player to guess the letter of a random word based on its length. If the player guesses a letter that is in the word, the letter is written where it would be in the word. Reveal all the letters to win. If the player guesses a letter that is not in the word, part of a hanged man is drawn. If the drawing is made complete, like the ASCII art below, the player loses.
-
- +---+
- 
- |
- 0
-/|\
-/ \
+Hangman asks the player to guess the letter of a random word based on its length. If the player guesses a letter that is in the word, the letter is written where it would be in the word. Reveal all the letters to win. If the player guesses a letter that is not in the word, part of a hanged man is drawn. If the drawing is made complete, the player loses.
 
 At the beginning of each game, the player is asked to choose a difficulty setting, with Easy Mode giving the player a word that is 9 or more letters long, Normal Mode giving the player a word that is between 5 and 8 letters long, and Hard Mode giving the player a word that is 4 or fewer letters long. This is done by reading the entire list of words from the words.txt file and placing each in a list based on the word's length.
 
