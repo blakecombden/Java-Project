@@ -3,7 +3,7 @@ CP2561 Java Programming II Project - Hangman
 
 Run Program:
 
-Open the folder called "Java-Project" in an IDE. In the src folder, there are 9 java files, 5 wav files, and 1 txt file:
+Download and unzip the folder called "JavaProject". Create a project in your IDE and open the unzipped folder. In the src folder, there are 9 java files, 5 wav files, and 1 txt file:
 
 - HangmanGame.java
 - PlayGame.java
