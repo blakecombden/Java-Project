@@ -1,5 +1,6 @@
 # Java-Project
 CP2561 Java Programming II Project - Hangman
+Blake Combden, Matthew Holloway
 
 Run Program:
 
